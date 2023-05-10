@@ -17,7 +17,7 @@ function collectFine() public {
 
 This function finds the difference between the starting and current balance, making sure that the difference is more than zero. However, someone could take advantage of this by using a `self-destruct` command on a contract that has ether. This would bypass the required checks.
 
-An attacker can exploit this vulnerability by creating a basic `selfdestruct` contract that sends a single wei to the RetirementSavingsChallenge contract. This results in an arithmetic underflow, making the current balance larger than the initial balance. The attacker can then invoke the `collectFine` function, causing an underflow in the penalty calculation and ultimately transferring the entire contract balance to the beneficiary.
+An attacker can exploit this vulnerability by creating a basic `selfdestruct` contract that sends a single wei to the RetirementSavingsChallenge contract. This results in an arithmetic underflow, making the current balance larger than the initial balance. The attacker can then invoke the `collectPenalty` function, causing an underflow in the penalty calculation and ultimately transferring the entire contract balance to the beneficiary.
 
 The vulnerability exists because Ethereum allows ether to be forcibly sent to a contract by calling the `selfdestruct` function, without the need for a fallback function. The code for the `selfdestruct` contract that an attacker could use to exploit this vulnerability is as follows:
 
