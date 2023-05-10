@@ -15,7 +15,7 @@ function collectFine() public {
 }
 ```
 
-This function calculates the difference between the starting and current balance, and ensures that it is greater than zero. Nevertheless, an attacker can exploit this by using the `selfdestruct` command on a contract holding ether, which circumvents the necessary checks.
+This function finds the difference between the starting and current balance, making sure that the difference is more than zero. However, someone could take advantage of this by using a `self-destruct` command on a contract that has ether. This would bypass the required checks.
 
 An attacker can exploit this vulnerability by creating a basic `selfdestruct` contract that sends a single wei to the RetirementSavingsChallenge contract. This results in an arithmetic underflow, making the current balance larger than the initial balance. The attacker can then invoke the `collectFine` function, causing an underflow in the penalty calculation and ultimately transferring the entire contract balance to the beneficiary.
 
