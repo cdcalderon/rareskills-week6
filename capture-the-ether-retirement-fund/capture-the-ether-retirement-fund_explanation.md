@@ -2,7 +2,7 @@
 
 The Retirement Savings Challenge is a smart contract that enforces penalties on premature withdrawals by transferring the entire contract balance to a designated beneficiary. The `collectFine` function in the contract detects early withdrawals:
 
-```javascript
+```solidity
 function collectFine() public {
   // ...
   uint256 amountWithdrawn = initialBalance - address(this).balance;
@@ -21,7 +21,7 @@ An attacker can exploit this vulnerability by creating a basic `selfdestruct` co
 
 The vulnerability exists because Ethereum allows ether to be forcibly sent to a contract by calling the `selfdestruct` function, without the need for a fallback function. The code for the `selfdestruct` contract that an attacker could use to exploit this vulnerability is as follows:
 
-```
+```solidity
 contract RetirementSavingsAttacker {
 
     constructor (address payable targetAddress) payable {
