@@ -4,6 +4,15 @@ The vulnerability in this contract lies in the lack of proper handling of intege
 
 The issue occurs in the lines `require(balances[msg.sender] - _value >= 0)` and `balances[msg.sender] -= _value`. To exploit this, transfer 21 tokens to another address, causing an underflow and setting your balance to a very large number.
 
+```solidity
+function transfer(address _to, uint _value) public returns (bool) {
+        require(balances[msg.sender] - _value >= 0);
+        balances[msg.sender] -= _value;
+        balances[_to] += _value;
+        return true;
+    }
+```
+
 To exploit this vulnerability, the attacker can transfer 21 tokens (more than the initial 20) to another address. This will cause an underflow, setting the balance to a very large number.
 
 ```solidity
